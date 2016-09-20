@@ -1,0 +1,7 @@
+﻿CREATE TABLE TestTable1
+(
+	Id			INT IDENTITY	NOT NULL,
+	Column1		VARCHAR(20)		NOT NULL,
+	Column2		VARCHAR(255)	NOT NULL,
+	Column3		BIT				NOT NULL
+)
