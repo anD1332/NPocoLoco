@@ -6,19 +6,22 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using log4net;
 using NPoco;
+using NPocoLoco.Configuration;
 using NPocoLoco.Models;
 
 namespace NPocoLoco.Deployment
 {
     public class DatabaseDeployment : IDatabaseDeployment
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof (DatabaseDeployment));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(DatabaseDeployment));
+        private readonly INPocoLocoConfig _configuration;
 
         private readonly IDatabase _db;
 
-        public DatabaseDeployment(IDatabase database)
+        public DatabaseDeployment(IDatabase database, INPocoLocoConfig config)
         {
             _db = database;
+            _configuration = config;
         }
 
         public void Run()
@@ -35,14 +38,9 @@ namespace NPocoLoco.Deployment
 
         public IEnumerable<DeploymentScript> GetDeploymentScripts()
         {
-            var scriptNameRegex = new Regex(@"(.*)\.Scripts\.(?<name>\w+)\.sql$");
+            var scriptNameRegex = new Regex(@"(.*)\.NPocoLoco\.Scripts\.(?<name>\w+)\.sql$");
 
-            var migrations = new List<DeploymentScript>();
-
-            var assemblyName = "NPocoLoco.Tests.Unit";
-            var resourceBaseName = "Resources";
-
-            var assembly = Assembly.Load(assemblyName);
+            var assembly = Assembly.Load(_configuration.GetConfigSection().ResourcesAssemblyName);
 
             var resources = assembly.GetManifestResourceNames().OrderBy(x => x).ToList();
 
@@ -51,16 +49,18 @@ namespace NPocoLoco.Deployment
                 var regexMatch = scriptNameRegex.Match(resource);
                 var name = regexMatch.Groups["name"].Value;
 
-                string sql;
-
                 var manifestResourceStream = assembly.GetManifestResourceStream(resource);
 
-                using (var sr = new StreamReader(manifestResourceStream))
+                if (manifestResourceStream != null)
                 {
-                    sql = sr.ReadToEnd();
-                }
+                    string sql;
+                    using (var sr = new StreamReader(manifestResourceStream))
+                    {
+                        sql = sr.ReadToEnd();
+                    }
 
-                yield return new DeploymentScript(name, sql);
+                    yield return new DeploymentScript(name, sql);
+                }
             }
         }
 
@@ -76,13 +76,12 @@ namespace NPocoLoco.Deployment
             if (CheckForFailedScripts())
             {
                 Log.Fatal("An error occurred when trying to process a previous migration");
-                throw new Exception("There are failed deployments which need to be resolved before any more can be executed");
+                throw new Exception(
+                    "There are failed deployments which need to be resolved before any more can be executed");
             }
 
             foreach (var deploymentScript in scripts)
-            {
                 RunDeploymentScript(deploymentScript);
-            }
         }
 
         public void RunDeploymentScript(DeploymentScript script)

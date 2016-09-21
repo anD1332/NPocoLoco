@@ -4,6 +4,7 @@ using System.Linq;
 using FluentAssertions;
 using Moq;
 using NPoco;
+using NPocoLoco.Configuration;
 using NPocoLoco.Deployment;
 using NPocoLoco.Models;
 using NUnit.Framework;
@@ -15,9 +16,14 @@ namespace NPocoLoco.Tests.Unit.Deployment
         [Test]
         public void GetDeploymentScripts_Returns_TWO_DeploymentScripts()
         {
+            var configSection = new NPocoLocoSection {Connection = "", ResourcesAssemblyName = "NPocoLoco.Tests.Unit"};
+
             var mockDb = new Mock<IDatabase>();
 
-            var databaseDeployment = new DatabaseDeployment(mockDb.Object);
+            var mockConfig = new Mock<INPocoLocoConfig>();
+            mockConfig.Setup(x => x.GetConfigSection()).Returns(configSection);
+
+            var databaseDeployment = new DatabaseDeployment(mockDb.Object, mockConfig.Object);
 
             var result = databaseDeployment.GetDeploymentScripts().ToList();
             result.Count().Should().Be(2);
@@ -36,7 +42,9 @@ namespace NPocoLoco.Tests.Unit.Deployment
             var mockDb = new Mock<IDatabase>();
             mockDb.Setup(x => x.Query<MigrationHistory>(It.IsAny<string>())).Returns(failedList);
 
-            var deployment = new DatabaseDeployment(mockDb.Object);
+            var mockConfig = new Mock<INPocoLocoConfig>();
+
+            var deployment = new DatabaseDeployment(mockDb.Object, mockConfig.Object);
 
             Action action = () => deployment.RunDeploymentScripts(new List<DeploymentScript>());
 
@@ -53,7 +61,9 @@ namespace NPocoLoco.Tests.Unit.Deployment
             var mockDb = new Mock<IDatabase>();
             mockDb.Setup(x => x.Exists<MigrationHistory>(It.IsAny<string>())).Returns(true);
 
-            var deployment = new DatabaseDeployment(mockDb.Object);
+            var mockConfig = new Mock<INPocoLocoConfig>();
+
+            var deployment = new DatabaseDeployment(mockDb.Object, mockConfig.Object);
             deployment.RunDeploymentScript(script);
 
             mockDb.Verify(x => x.BeginTransaction(), Times.Never);
@@ -68,7 +78,9 @@ namespace NPocoLoco.Tests.Unit.Deployment
             mockDb.Setup(x => x.Exists<MigrationHistory>(It.IsAny<string>())).Returns(false);
             mockDb.Setup(x => x.Insert(It.IsAny<MigrationHistory>())).Throws<Exception>();
 
-            var deployment = new DatabaseDeployment(mockDb.Object);
+            var mockConfig = new Mock<INPocoLocoConfig>();
+
+            var deployment = new DatabaseDeployment(mockDb.Object, mockConfig.Object);
 
             Action action = () => deployment.RunDeploymentScript(script);
 
@@ -86,7 +98,9 @@ namespace NPocoLoco.Tests.Unit.Deployment
             mockDb.Setup(x => x.Insert(It.IsAny<MigrationHistory>())).Throws<Exception>();
             mockDb.Setup(x => x.AbortTransaction()).Verifiable();
 
-            var deployment = new DatabaseDeployment(mockDb.Object);
+            var mockConfig = new Mock<INPocoLocoConfig>();
+
+            var deployment = new DatabaseDeployment(mockDb.Object, mockConfig.Object);
 
             Action action = () => deployment.RunDeploymentScript(script);
 

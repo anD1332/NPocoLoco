@@ -53,9 +53,10 @@
   <ItemGroup>
     <Compile Include="Configuration\NPocoLocoConfig.cs" />
     <Compile Include="Configuration\NPocoLocoSection.cs" />
-    <Compile Include="Deployment.cs" />
+    <Compile Include="Deploy.cs" />
     <Compile Include="Deployment\DatabaseDeployment.cs" />
     <Compile Include="Deployment\IDatabaseDeployment.cs" />
+    <Compile Include="Configuration\INPocoLocoConfig.cs" />
     <Compile Include="Models\DeploymentScript.cs" />
     <Compile Include="Models\MigrationHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

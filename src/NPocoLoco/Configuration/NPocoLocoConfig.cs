@@ -3,12 +3,12 @@ using log4net;
 
 namespace NPocoLoco.Configuration
 {
-    public static class NPocoLocoConfig
+    public class NPocoLocoConfig : INPocoLocoConfig
     {
         private const string ConfigSectionName = "nPocoLocoConfigGroup/nPocoLocoSection";
         private static readonly ILog Log = LogManager.GetLogger(typeof (NPocoLocoConfig));
-
-        public static NPocoLocoSection GetConfiguration()
+        
+        public NPocoLocoSection GetConfigSection()
         {
             var configSection = ConfigurationManager.GetSection(ConfigSectionName) as NPocoLocoSection;
 

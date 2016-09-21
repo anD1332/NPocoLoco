@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using NPoco;
+using NPocoLoco.Configuration;
 using NPocoLoco.Deployment;
 using NUnit.Framework;
 
@@ -53,10 +54,7 @@ namespace NPocoLoco.Tests.Integration
                 conn.Close();
             }
 
-            var database = new Database(DatabaseName);
-
-            var deployment = new DatabaseDeployment(database);
-            deployment.Run();
+            Deploy.Run();
         }
 
         [OneTimeTearDown]

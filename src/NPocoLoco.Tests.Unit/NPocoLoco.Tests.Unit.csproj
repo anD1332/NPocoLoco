@@ -95,12 +95,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Deployment\Scripts\201609202014_CreateTestTable1.sql">
+    <EmbeddedResource Include="NPocoLoco.Scripts\201609202014_CreateTestTable1.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Deployment\Scripts\201609202015_CreateTestTable2.sql">
+    <EmbeddedResource Include="NPocoLoco.Scripts\201609202015_CreateTestTable2.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Deployment\Scripts\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

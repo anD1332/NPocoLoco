@@ -20,7 +20,7 @@ namespace NPocoLoco.Tests.Unit.Configuration
         {
             var config = (NPocoLocoSection)ConfigurationManager.GetSection("nPocoLocoConfigGroup/nPocoLocoSection");
 
-            config.ResourceInformation.ResourcesAssemblyName.Should().Be("NPocoLoco.Tests.Unit");
+            config.ResourcesAssemblyName.Should().Be("NPocoLoco.Tests.Unit");
         }
 
         //[Test]
