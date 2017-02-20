@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>anD1332.NPocoLoco</id>
+    <version>0.2.0</version>
+    <title>NPocoLoco</title>
+    <authors>anD1332</authors>
+    <owners>anD1332</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/anD1332/NPocoLoco</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Database migration runner based around using NPoco</description>
+    <releaseNotes>Beta Release See https://github.com/anD1332/NPocoLoco for full release notes</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>NPoco Migrations Migrate Migration</tags>
+    <dependencies>
+    	<dependency id="log4net" version="2.0.7" />
+    	<dependency id="NPoco" version="3.4.8" />
+	</dependencies>
+    </metadata>
+	<files>
+		<file src="..\..\build\app.config.install.xdt" target="content\app.config.install.xdt" />
+        <file src="..\..\build\app.config.uninstall.xdt" target="content\app.config.uninstall.xdt" />
+		<file src="..\..\build\web.config.install.xdt" target="content\web.config.install.xdt" />
+        <file src="..\..\build\web.config.uninstall.xdt" target="content\web.config.uninstall.xdt" />
+	</files>
+  
+</package>

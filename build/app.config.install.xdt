@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <configSections  >
+    <sectionGroup name="nPocoLocoConfigGroup" xdt:Transform="Insert">
+      <section name="nPocoLocoSection"
+                type="NPocoLoco.Configuration.NPocoLocoSection, NPocoLoco"
+                allowLocation="true"
+                allowDefinition="Everywhere" />
+    </sectionGroup>
+  </configSections>
+
+  <nPocoLocoConfigGroup xdt:Transform="InsertIfMissing">
+    <nPocoLocoSection connection="" resourcesAssemblyName=""/>
+  </nPocoLocoConfigGroup>
+</configuration>
