@@ -10,6 +10,6 @@
   </configSections>
 
   <nPocoLocoConfigGroup xdt:Transform="InsertIfMissing">
-    <nPocoLocoSection connection="" resourcesAssemblyName=""/>
+    <nPocoLocoSection connection="" resourcesAssemblyName="" xdt:Transform="InsertIfMissing"/>
   </nPocoLocoConfigGroup>
 </configuration>

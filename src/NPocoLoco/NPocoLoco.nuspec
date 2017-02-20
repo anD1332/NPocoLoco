@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>anD1332.NPocoLoco</id>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <title>NPocoLoco</title>
     <authors>anD1332</authors>
     <owners>anD1332</owners>
@@ -19,10 +19,6 @@
 	</dependencies>
     </metadata>
 	<files>
-		<file src="..\..\build\app.config.install.xdt" target="content\app.config.install.xdt" />
-        <file src="..\..\build\app.config.uninstall.xdt" target="content\app.config.uninstall.xdt" />
-		<file src="..\..\build\web.config.install.xdt" target="content\web.config.install.xdt" />
-        <file src="..\..\build\web.config.uninstall.xdt" target="content\web.config.uninstall.xdt" />
-	</files>
-  
+		
+	</files>  
 </package>
