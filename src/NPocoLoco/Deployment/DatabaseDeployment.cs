@@ -28,11 +28,19 @@ namespace NPocoLoco.Deployment
         {
             Log.Info("Starting database deployment...");
 
-            Initialize();
+            try
+            {
+                Initialize();
 
-            var scripts = GetDeploymentScripts();
-            RunDeploymentScripts(scripts);
-
+                var scripts = GetDeploymentScripts();
+                RunDeploymentScripts(scripts);
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex.Message, ex);
+                throw;
+            }
+            
             Log.Info("Database deployment successful");
         }
 
