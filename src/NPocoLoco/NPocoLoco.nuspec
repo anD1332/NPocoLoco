@@ -8,7 +8,7 @@
     <owners>anD1332</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/anD1332/NPocoLoco</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Database migration runner based around using NPoco</description>
     <releaseNotes>Beta Release See https://github.com/anD1332/NPocoLoco for full release notes</releaseNotes>
     <copyright>Copyright 2016</copyright>
