@@ -14,8 +14,8 @@
     <copyright>Copyright 2016</copyright>
     <tags>NPoco Migrations Migrate Migration</tags>
     <dependencies>
-    	<dependency id="log4net" version="2.0.7" />
-    	<dependency id="NPoco" version="3.4.8" />
+    	<dependency id="log4net" version="2.0.8" />
+    	<dependency id="NPoco" version="3.5.1" />
 	</dependencies>
     </metadata>
 	<files>
